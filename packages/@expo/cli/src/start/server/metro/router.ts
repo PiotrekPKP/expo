@@ -1,3 +1,4 @@
+import { getConfig } from '@expo/config';
 import path from 'path';
 import resolveFrom from 'resolve-from';
 
@@ -8,6 +9,11 @@ const debug = require('debug')('expo:start:server:metro:router') as typeof conso
  * This mechanism does require the server to restart after the `expo-router` package is installed.
  */
 export function getAppRouterRelativeEntryPath(projectRoot: string): string | undefined {
+  // Load config and get router root
+  const {
+    exp: { routerRoot },
+  } = getConfig(projectRoot);
+
   // Auto pick App entry
   const routerEntry =
     resolveFrom.silent(projectRoot, 'expo-router/entry') ?? getFallbackEntryRoot(projectRoot);
@@ -15,7 +21,7 @@ export function getAppRouterRelativeEntryPath(projectRoot: string): string | und
     return undefined;
   }
   // It doesn't matter if the app folder exists.
-  const appFolder = path.join(projectRoot, 'app');
+  const appFolder = path.join(projectRoot, routerRoot);
   const appRoot = path.relative(path.dirname(routerEntry), appFolder);
   debug('routerEntry', routerEntry, appFolder, appRoot);
   return appRoot;

@@ -76,6 +76,10 @@ export interface ExpoConfig {
    */
   icon?: string;
   /**
+   * Local path to a directory that will be used for storing your app's screens.
+   */
+  routerRoot: string;
+  /**
    * Configuration for remote (push) notifications.
    */
   notification?: {

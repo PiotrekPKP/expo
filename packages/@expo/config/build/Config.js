@@ -384,7 +384,7 @@ function ensureConfigHasDefaultValues({
   packageJsonPath,
   skipSDKVersionRequirement = false
 }) {
-  var _exp$name, _exp$slug, _exp$version;
+  var _exp$name, _exp$slug, _exp$version, _exp$routerRoot;
   if (!exp) {
     exp = {};
   }
@@ -406,6 +406,7 @@ function ensureConfigHasDefaultValues({
   const name = (_exp$name = exp.name) !== null && _exp$name !== void 0 ? _exp$name : pkgName;
   const slug = (_exp$slug = exp.slug) !== null && _exp$slug !== void 0 ? _exp$slug : (0, _slugify().default)(name.toLowerCase());
   const version = (_exp$version = exp.version) !== null && _exp$version !== void 0 ? _exp$version : pkgVersion;
+  const routerRoot = (_exp$routerRoot = exp.routerRoot) !== null && _exp$routerRoot !== void 0 ? _exp$routerRoot : 'app';
   let description = exp.description;
   if (!description && typeof pkg.description === 'string') {
     description = pkg.description;
@@ -415,7 +416,8 @@ function ensureConfigHasDefaultValues({
     name,
     slug,
     version,
-    description
+    description,
+    routerRoot
   };
   let sdkVersion;
   try {

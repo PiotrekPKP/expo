@@ -327,12 +327,13 @@ function ensureConfigHasDefaultValues({
   const name = exp.name ?? pkgName;
   const slug = exp.slug ?? slugify(name.toLowerCase());
   const version = exp.version ?? pkgVersion;
+  const routerRoot = exp.routerRoot ?? 'app';
   let description = exp.description;
   if (!description && typeof pkg.description === 'string') {
     description = pkg.description;
   }
 
-  const expWithDefaults = { ...exp, name, slug, version, description };
+  const expWithDefaults = { ...exp, name, slug, version, description, routerRoot };
 
   let sdkVersion;
   try {
